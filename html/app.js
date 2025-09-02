@@ -3,9 +3,9 @@ class LoadingScreen {
     constructor() {
         this.currentTipIndex = 0;
         this.progress = 0;
-        this.playerData = {
-            name: 'Loading...',
-            id: '---'
+        this.serverData = {
+            currentPlayers: 0,
+            maxPlayers: 64
         };
         
         // Server tips/messages that rotate
@@ -94,15 +94,15 @@ class LoadingScreen {
         }
     }
     
-    updatePlayerInfo(name, id) {
-        this.playerData.name = name || 'Unknown Player';
-        this.playerData.id = id || '---';
+    updatePlayerCount(current, max) {
+        this.serverData.currentPlayers = current || 0;
+        this.serverData.maxPlayers = max || 64;
         
-        const nameElement = document.getElementById('playerName');
-        const idElement = document.getElementById('playerId');
+        const currentElement = document.getElementById('currentPlayers');
+        const maxElement = document.getElementById('maxPlayers');
         
-        if (nameElement) nameElement.textContent = this.playerData.name;
-        if (idElement) idElement.textContent = this.playerData.id;
+        if (currentElement) currentElement.textContent = this.serverData.currentPlayers;
+        if (maxElement) maxElement.textContent = this.serverData.maxPlayers;
     }
     
     simulateLoading() {
@@ -159,9 +159,9 @@ const handlers = {
     },
     
     // Custom handler for player data
-    updatePlayerData(data) {
+    updateServerData(data) {
         if (loadingScreen) {
-            loadingScreen.updatePlayerInfo(data.name, data.id);
+            loadingScreen.updatePlayerCount(data.currentPlayers, data.maxPlayers);
         }
     }
 };
@@ -170,9 +170,9 @@ const handlers = {
 document.addEventListener('DOMContentLoaded', () => {
     loadingScreen = new LoadingScreen();
     
-    // Simulate player data for demonstration
+    // Simulate server data for demonstration
     setTimeout(() => {
-        loadingScreen.updatePlayerInfo('John Doe', '12345');
+        loadingScreen.updatePlayerCount(32, 64);
     }, 2000);
 });
 

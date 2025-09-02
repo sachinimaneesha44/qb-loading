@@ -17,7 +17,8 @@ const LoadingConfig = {
         gradientSpeed: 15, // seconds
         tipRotationSpeed: 4000, // milliseconds
         particleCount: 50,
-        logoEntranceDelay: 0 // milliseconds
+        logoEntranceDelay: 0, // milliseconds
+        pulseRingSpeed: 4 // seconds
     },
     
     // Server tips that rotate during loading

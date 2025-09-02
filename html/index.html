@@ -85,7 +85,7 @@
         }
         
         .pulse-ring {
-            animation: pulseRing 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+            animation: pulseRing 4s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
         }
         
         @keyframes pulseRing {
@@ -147,15 +147,13 @@
         
         <!-- Player Info Section -->
         <div class="bg-gray-900/30 backdrop-blur-sm rounded-lg border border-gray-700/30 p-6 w-full max-w-md">
-            <div class="grid grid-cols-2 gap-4 text-center">
-                <div>
-                    <p class="text-gray-400 text-sm uppercase tracking-wide">Player Name</p>
-                    <p id="playerName" class="text-white font-semibold text-lg">Loading...</p>
-                </div>
-                <div>
-                    <p class="text-gray-400 text-sm uppercase tracking-wide">Player ID</p>
-                    <p id="playerId" class="text-blue-400 font-semibold text-lg">---</p>
-                </div>
+            <div class="text-center">
+                <p class="text-gray-400 text-sm uppercase tracking-wide mb-2">Connected Players</p>
+                <p id="playerCount" class="text-green-400 font-bold text-2xl">
+                    <span id="currentPlayers">0</span>
+                    <span class="text-gray-500 text-lg">/</span>
+                    <span id="maxPlayers" class="text-gray-300">64</span>
+                </p>
             </div>
         </div>
         
