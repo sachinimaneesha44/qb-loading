@@ -24,6 +24,7 @@ const LoadingConfig = {
     // Server tips that rotate during loading
     serverTips: [
         'Welcome to QBCore! Press F1 to open the radial menu.',
+        'Visit our Web UCP: ucp.noteme.site to see all your character details.',
         'Use /help to see all available commands.',
         'Join our Discord for support and updates.',
         'Remember to follow server rules and have fun!',
