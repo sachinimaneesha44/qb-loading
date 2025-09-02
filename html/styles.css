@@ -1,128 +1,162 @@
-/* Customize style for dialog menus and carousels here */
+/* Modern QBCore Loading Screen Styles */
 
-.brand-logo {
-    width: 14% !important;
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.text-detailbutton {
-    color: rgb(103, 108, 111) !important;
+html, body {
+    height: 100%;
+    overflow: hidden;
+    background: transparent;
+    font-family: 'Inter', sans-serif;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
-.bg-bgbutton {
-    background: rgb(103, 108, 111) !important;
+/* Custom animations and effects */
+.animated-bg {
+    background: linear-gradient(-45deg, #0f0f23, #1a1a2e, #16213e, #0f3460);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
 }
 
-.text-togglecolor {
-    color: rgb(220 20 60) !important;
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-.loadingbar {
-    width: 27% !important;
-    height: auto !important;
-    padding: 20px !important;
-    padding-left: 0px !important;
-    padding-right: 25px !important;
-}
-
-.loadbar {
-    width: auto;
-    height: 1.5vh;
-    background: rgb(103, 108, 111);
-    box-shadow: 0 1px 5px #0003, 0 2px 2px #00000024, 0 3px 1px -2px #0000001f;
-    z-index: 9999;
-}
-
-.thingy {
-    width: auto;
-    height: 1.5vh;
-    background: rgb(220 20 60);
-    z-index: 9999;
-}
-
-.q-carousel {
-    background: rgb(0, 0, 0) !important;
-    height: auto !important;
-}
-
-.q-mb-md-d {
-    padding-top: 0px !important;
-    padding-left: 0.3vw !important;
-}
-
-.q-toggle {
-    margin-left: -0.5vw !important;
-}
-
-.q-toggle__label {
-    font-size: 15px !important;
-    font-weight: 500 !important;
-}
-
-.q-card {
-    z-index: 9999 !important;
-}
-
-.q-btn {
-    z-index: 9999 !important;
-}
-
-html,
-body {
-    background: transparent !important;
-    max-width: 100% !important;
-    overflow-x: hidden !important;
-}
-
-body {
-    -webkit-user-select: none !important;
-    -moz-user-select: none !important;
-    -ms-user-select: none !important;
-    -o-user-select: none !important;
-    user-select: none !important;
-}
-
-body.desktop.no-touch.within-iframe.body--light.q-body--prevent-scroll {
-    position: relative !important;
-}
-
-.absolute-full,
-.fixed-full,
-.fullscreen {
-    top: -3px !important;
-    bottom: -1px !important;
-}
-
-.absolute-bottom,
-.fixed-bottom {
-    z-index: 1 !important;
-}
-
-span.q-btn__content.text-center.col.items-center.q-anchor--skip.justify-center.column {
-    text-transform: none !important;
-}
-
-.q-avatar__content.row.flex-center.overflow-hidden {
-    overflow: initial !important;
-}
-
-.q-carousel .q-carousel--padding,
-.q-carousel__slide {
-    padding-top: 0px !important;
-}
-
-.scroll {
-    overflow: hidden !important;
-}
-
-.q-focus-helper {
-    opacity: 0 !important;
-}
-
-#video {
-    position: fixed;
-    top: 0;
-    left: 0;
+.floating-particles {
+    position: absolute;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 50%;
+    animation: float 20s infinite linear;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.logo-entrance {
+    animation: logoEntrance 2s ease-out forwards;
+}
+
+@keyframes logoEntrance {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.progress-glow {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+}
+
+.tip-fade {
+    animation: tipFade 4s ease-in-out infinite;
+}
+
+@keyframes tipFade {
+    0%, 100% { 
+        opacity: 0; 
+        transform: translateY(10px); 
+    }
+    25%, 75% { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+.pulse-ring {
+    animation: pulseRing 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+}
+
+@keyframes pulseRing {
+    0% {
+        transform: scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2.4);
+        opacity: 0;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .particle {
+        display: none; /* Hide particles on mobile for performance */
+    }
+}
+
+/* Ultrawide support */
+@media (min-width: 2560px) {
+    .floating-particles {
+        transform: scale(1.2);
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .animated-bg {
+        background: #000;
+    }
+    
+    .particle {
+        background: rgba(255, 255, 255, 0.2);
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .animated-bg {
+        animation: none;
+        background: #1a1a2e;
+    }
+    
+    .particle {
+        animation: none;
+        display: none;
+    }
+    
+    .logo-entrance {
+        animation: none;
+        opacity: 1;
+        transform: scale(1);
+    }
+    
+    .pulse-ring {
+        animation: none;
+        display: none;
+    }
 }

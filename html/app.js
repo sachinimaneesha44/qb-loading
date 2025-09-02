@@ -1,108 +1,194 @@
-const { ref } = Vue
-
-// Customize language for dialog menus and carousels here
-
-const load = Vue.createApp({
-  setup () {
-    return {
-      CarouselText1: 'You can add/remove items, vehicles, jobs & gangs through the shared folder.',
-      CarouselSubText1: 'Photo captured by: Markyoo#8068',
-      CarouselText2: 'Adding additional player data can be achieved by modifying the qb-core player.lua file.',
-      CarouselSubText2: 'Photo captured by: ihyajb#9723',
-      CarouselText3: 'All server-specific adjustments can be made in the config.lua files throughout the build.',
-      CarouselSubText3: 'Photo captured by: FLAPZ[INACTIV]#9925',
-      CarouselText4: 'For additional support please join our community at discord.gg/qbcore',
-      CarouselSubText4: 'Photo captured by: Robinerino#1312',
-
-      DownloadTitle: 'Downloading QBCore Server',
-      DownloadDesc: "Hold tight while we begin downloading all the resources/assets required to play on QBCore Server. \n\nAfter download has been finished successfully, you'll be placed into the server and this screen will disappear. Please don't leave or turn off your PC. ",
-
-      SettingsTitle: 'Settings',
-      AudioTrackDesc1: 'When disabled the current audio-track playing will be stopped.',
-      AutoPlayDesc2: 'When disabled carousel images will stop cycling and remain on the last shown.',
-      PlayVideoDesc3: 'When disabled video will stop playing and remain paused.',
-
-      KeybindTitle: 'Default Keybinds',
-      Keybind1: 'Open Inventory',
-      Keybind2: 'Cycle Proximity',
-      Keybind3: 'Open Phone',
-      Keybind4: 'Toggle Seat Belt',
-      Keybind5: 'Open Target Menu',
-      Keybind6: 'Radial Menu',
-      Keybind7: 'Open Hud Menu',
-      Keybind8: 'Talk Over Radio',
-      Keybind9: 'Open Scoreboard',
-      Keybind10: 'Vehicle Locks',
-      Keybind11: 'Toggle Engine',
-      Keybind12: 'Pointer Emote',
-      Keybind13: 'Keybind Slots',
-      Keybind14: 'Hands Up Emote',
-      Keybind15: 'Use Item Slots',
-      Keybind16: 'Cruise Control',
-
-      firstap: ref(true),
-      secondap: ref(true),
-      thirdap: ref(true),
-      firstslide: ref(1),
-      secondslide: ref('1'),
-      thirdslide: ref('5'),
-      audioplay: ref(true),
-      playvideo: ref(true),
-      download: ref(true),
-      settings: ref(false),
+// Modern QBCore Loading Screen Configuration
+class LoadingScreen {
+    constructor() {
+        this.currentTipIndex = 0;
+        this.progress = 0;
+        this.playerData = {
+            name: 'Loading...',
+            id: '---'
+        };
+        
+        // Server tips/messages that rotate
+        this.serverTips = [
+            'Welcome to QBCore! Press F1 to open the radial menu.',
+            'Use /help to see all available commands.',
+            'Join our Discord for support and updates.',
+            'Remember to follow server rules and have fun!',
+            'Press TAB to open your inventory.',
+            'Use ALT to interact with objects and players.',
+            'Press M to open your phone.',
+            'Hold B to toggle your seatbelt in vehicles.'
+        ];
+        
+        this.init();
     }
-  }
-})
-
-load.use(Quasar, { config: {} })
-load.mount('#loading-main')
-
-var audio = document.getElementById("audio");
-audio.volume = 0.05;
-
-function audiotoggle() {
-    var audio = document.getElementById("audio");
-    if (audio.paused) {
-        audio.play();
-    } else {
-        audio.pause();
+    
+    init() {
+        this.createParticles();
+        this.startTipRotation();
+        this.setupAudio();
+        this.simulateLoading();
+    }
+    
+    createParticles() {
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 50;
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            // Random size between 2-6px
+            const size = Math.random() * 4 + 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            // Random horizontal position
+            particle.style.left = `${Math.random() * 100}%`;
+            
+            // Random animation delay
+            particle.style.animationDelay = `${Math.random() * 20}s`;
+            
+            // Random animation duration
+            particle.style.animationDuration = `${Math.random() * 10 + 15}s`;
+            
+            particlesContainer.appendChild(particle);
+        }
+    }
+    
+    startTipRotation() {
+        this.updateTip();
+        setInterval(() => {
+            this.currentTipIndex = (this.currentTipIndex + 1) % this.serverTips.length;
+            this.updateTip();
+        }, 4000); // Change tip every 4 seconds
+    }
+    
+    updateTip() {
+        const tipElement = document.getElementById('loadingTip');
+        tipElement.style.opacity = '0';
+        
+        setTimeout(() => {
+            tipElement.textContent = this.serverTips[this.currentTipIndex];
+            tipElement.style.opacity = '1';
+        }, 200);
+    }
+    
+    setupAudio() {
+        const audio = document.getElementById('audio');
+        if (audio) {
+            audio.volume = 0.05;
+            audio.play().catch(e => console.log('Audio autoplay prevented'));
+        }
+    }
+    
+    updateProgress(percentage) {
+        this.progress = Math.min(100, Math.max(0, percentage));
+        
+        const progressBar = document.getElementById('progressBar');
+        const progressText = document.getElementById('progressText');
+        
+        if (progressBar && progressText) {
+            progressBar.style.width = `${this.progress}%`;
+            progressText.textContent = `${Math.round(this.progress)}%`;
+        }
+    }
+    
+    updatePlayerInfo(name, id) {
+        this.playerData.name = name || 'Unknown Player';
+        this.playerData.id = id || '---';
+        
+        const nameElement = document.getElementById('playerName');
+        const idElement = document.getElementById('playerId');
+        
+        if (nameElement) nameElement.textContent = this.playerData.name;
+        if (idElement) idElement.textContent = this.playerData.id;
+    }
+    
+    simulateLoading() {
+        // Simulate loading progress for demonstration
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += Math.random() * 3;
+            this.updateProgress(progress);
+            
+            if (progress >= 100) {
+                clearInterval(interval);
+                this.onLoadingComplete();
+            }
+        }, 100);
+    }
+    
+    onLoadingComplete() {
+        // This would typically hide the loading screen
+        console.log('Loading complete!');
     }
 }
 
-function videotoggle() {
-    var video = document.getElementById("video");
-    if (video.paused) {
-        video.play();
-    } else {
-        video.pause();
-    }
-}
-
+// FiveM Event Handlers
 let count = 0;
 let thisCount = 0;
+let loadingScreen;
 
 const handlers = {
     startInitFunctionOrder(data) {
         count = data.count;
+        if (loadingScreen) {
+            loadingScreen.updateProgress(0);
+        }
     },
 
     initFunctionInvoking(data) {
-        document.querySelector(".thingy").style.left = "0%";
-        document.querySelector(".thingy").style.width = (data.idx / count) * 100 + "%";
+        if (loadingScreen && count > 0) {
+            const progress = (data.idx / count) * 100;
+            loadingScreen.updateProgress(progress);
+        }
     },
 
     startDataFileEntries(data) {
         count = data.count;
+        thisCount = 0;
     },
 
     performMapLoadFunction(data) {
         ++thisCount;
-
-        document.querySelector(".thingy").style.left = "0%";
-        document.querySelector(".thingy").style.width = (thisCount / count) * 100 + "%";
+        if (loadingScreen && count > 0) {
+            const progress = (thisCount / count) * 100;
+            loadingScreen.updateProgress(progress);
+        }
     },
+    
+    // Custom handler for player data
+    updatePlayerData(data) {
+        if (loadingScreen) {
+            loadingScreen.updatePlayerInfo(data.name, data.id);
+        }
+    }
 };
 
+// Initialize loading screen when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    loadingScreen = new LoadingScreen();
+    
+    // Simulate player data for demonstration
+    setTimeout(() => {
+        loadingScreen.updatePlayerInfo('John Doe', '12345');
+    }, 2000);
+});
+
+// FiveM message handler
 window.addEventListener("message", function (e) {
     (handlers[e.data.eventName] || function () {})(e.data);
 });
+
+// Audio controls (keeping compatibility with original)
+function audiotoggle() {
+    const audio = document.getElementById("audio");
+    if (audio) {
+        if (audio.paused) {
+            audio.play();
+        } else {
+            audio.pause();
+        }
+    }
+}

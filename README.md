@@ -1,46 +1,91 @@
+# QBCore Modern Loading Screen
+
+A sleek, modern, and animated loading screen for FiveM QBCore servers featuring gradient backgrounds, floating particles, and smooth animations.
+
+## Features
+
+- **Modern Design**: Clean, minimal interface with gradient backgrounds
+- **Smooth Animations**: Logo entrance, floating particles, and progress animations
+- **Responsive**: Works on all screen sizes including ultrawide monitors
+- **Customizable**: Easy configuration through `config.js`
+- **Performance Optimized**: Lightweight with reduced motion support
+- **Accessibility**: High contrast and reduced motion support
+
 ## Preview
-<div align="middle">
-    <img width="auto" src="https://user-images.githubusercontent.com/91661118/154784761-d9e1a3de-3f34-47dc-afc2-0aecb6d17042.png"/>
-</div>
 
-<br>
+The loading screen features:
+- Animated gradient background
+- Floating particle effects
+- Logo with pulse ring animation
+- Gradient progress bar with glow effects
+- Rotating server tips
+- Player information display
+- Modern typography using Inter font
 
-![ezgif com-gif-maker](https://user-images.githubusercontent.com/91661118/154891228-1fffbd8c-8b07-4175-bd25-fbfbd7e3ed38.gif)
+## Installation
 
-<br>
+1. Replace your existing `qb-loading` resource with this updated version
+2. Ensure your server logo is placed at `/assets/branding/qbcore.svg`
+3. Customize the configuration in `html/config.js`
+4. Restart your server
 
-## Key Features
-<div align="middle">
-    <img width="auto" src="https://user-images.githubusercontent.com/91661118/154636617-a2ad4c09-4b60-4438-832a-ed1c505b52ea.png"/>
-</div>
+## Customization
 
-* #### Bridge does not show while loading into server
-* #### Choose between an image carousel or video parallax
-* #### With ease customization with comments throughout instructions/information
-* #### Unique dialog menus and carousel texts
-* #### Unique default keybind carousel
-* #### Video pause and unpause toggle switch
-* #### Audio pause and unpause toggle switch
-* #### Autoplay carousel images toggle switch
+### Quick Customization
 
-<br>
+Edit `html/config.js` to customize:
 
-## Change to Carousel or Video
-<div align="middle">
-    <img width="auto" src="https://user-images.githubusercontent.com/91661118/154641230-17b3da6f-e731-472c-8447-d280d2d28c82.png"/>
-</div>
+- **Server Name**: Change the displayed server name
+- **Colors**: Modify the color scheme
+- **Tips**: Add/remove/edit rotating server tips
+- **Animations**: Adjust animation speeds and effects
+- **Performance**: Enable/disable features for better performance
 
-* #### Simply locate the HTML file found in: "html/index.html" exactly as shown underneath 
+### Logo Replacement
 
-![msedge_JyZqs9qYOF](https://user-images.githubusercontent.com/91661118/154891153-7b8a9e0b-5d89-460f-af4b-409e5105c229.gif)
+Replace `/assets/branding/qbcore.svg` with your server's logo. Recommended size: 128x128px or larger.
 
-<br>
+### Audio
 
-## Change Language
-<div align="middle">
-    <img width="auto" src="https://user-images.githubusercontent.com/91661118/154641827-fd6d3ced-9d9c-43fb-9b20-440d7ff562b0.png"/>
-</div>
+Place your audio file at `/assets/audio/noncopyright.mp3` or update the path in the HTML file.
 
-* #### Simply locate the Javascript file found in: "html/app.js" exactly as shown underneath
-![msedge_KLht2xu4CO](https://user-images.githubusercontent.com/91661118/154890941-5bc9db8f-6f15-4cb0-a7b3-1aa60a7d0824.gif)
+## Browser Compatibility
 
+- Chrome/Chromium (recommended)
+- Firefox
+- Safari
+- Edge
+
+## Performance Notes
+
+- Particles are automatically disabled on mobile devices
+- Reduced motion preferences are respected
+- Optimized for 60fps animations
+- Minimal resource usage
+
+## File Structure
+
+```
+qb-loading/
+├── fxmanifest.lua
+├── html/
+│   ├── index.html          # Main loading screen
+│   ├── app.js             # Loading logic and animations
+│   ├── styles.css         # Custom styles and animations
+│   └── config.js          # Configuration file
+├── assets/
+│   ├── branding/
+│   │   └── qbcore.svg     # Server logo
+│   ├── audio/
+│   │   └── noncopyright.mp3
+│   └── images/            # (removed - no longer needed)
+└── README.md
+```
+
+## License
+
+GNU General Public License v3.0
+
+## Support
+
+For support and updates, join the QBCore community Discord.

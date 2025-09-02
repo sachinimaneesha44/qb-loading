@@ -1,240 +1,176 @@
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta id="viewport" name="viewport" content ="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <link rel="stylesheet" type="text/css" href="styles.css"/>
-        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css"/>
-        <link href="https://cdn.jsdelivr.net/npm/quasar@2.1.0/dist/quasar.prod.css" rel="stylesheet" type="text/css"/>
-        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet" type="text/css"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js" defer></script>
-        <script src="https://cdn.jsdelivr.net/npm/quasar@2.1.0/dist/quasar.umd.prod.js" defer></script>
-        <script src="app.js" defer></script>
-    </head>
-    <!-- This is where you want to replace with your audio -->
-
-    <audio autoplay loop id="audio" src="/assets/audio/noncopyright.mp3"></audio>
-
-    <body>
-        <div id="loading-main" style="min-height: auto;">
-
-            <!-- Uncomment q-parallax and comment out q-carousel if you want to use a video background instead -->
-
-            <q-carousel animated v-model="firstslide" :autoplay="secondap" ref="carousel" infinite>
-                <q-carousel-slide :name="1" img-src="/assets/images/1.png"></q-carousel-slide>
-            </q-carousel>
-
-            <!-- This is where you want to replace with your video -->
-
-
-            <!-- <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%;">
-                <video id="video" style="width: 100%; height: 100%; object-fit: cover;" autoplay loop muted>
-                    <source type="video/mp4" src="/assets/video/freestockvideo.mp4">
-                </video>
-            </div> -->
-
-
-            <div class="absolute-top q-pa-xl">
-                <q-card flat style="width: auto; background: transparent;">
-                    <q-card-section class="row items-center no-wrap">
-                        <q-carousel animated infinite :autoplay="secondap" v-model="secondslide" transition-next="fade" transition-prev="fade" class="bg-transparent text-white">
-                            <q-carousel-slide name="1" class="column no-wrap flex-center">
-                                <div style="width: 30vw; white-space: pre-wrap;" class="text-left text-h6">
-                                    {{ CarouselText1 }}
-                                </div>
-                                <div style="opacity: 0.9; width: 30vw; white-space: pre-wrap;" class="text-left text-body1">
-                                    {{ CarouselSubText1 }}
-                                </div>
-                            </q-carousel-slide>
-                            <q-carousel-slide name="2" class="column no-wrap flex-center">
-                                <div style="width: 30vw; white-space: pre-wrap;" class="text-left text-h6">
-                                    {{ CarouselText2 }}
-                                </div>
-                                <div style="opacity: 0.9; width: 30vw; white-space: pre-wrap;" class="text-left text-body1">
-                                    {{ CarouselSubText2 }}
-                                </div>
-                            </q-carousel-slide>
-                            <q-carousel-slide name="3" class="column no-wrap flex-center">
-                                <div style="width: 30vw; white-space: pre-wrap;" class="text-left text-h6">
-                                    {{ CarouselText3 }}
-                                </div>
-                                <div style="opacity: 0.9; width: 30vw; white-space: pre-wrap;" class="text-left text-body1">
-                                    {{ CarouselSubText3 }}
-                                </div>
-                            </q-carousel-slide>
-                            <q-carousel-slide name="4" class="column no-wrap flex-center">
-                                <div style="width: 30vw; white-space: pre-wrap;" class="text-left text-h6">
-                                    {{ CarouselText4 }}
-                                </div>
-                                <div style="opacity: 0.9; width: 30vw; white-space: pre-wrap;" class="text-left text-body1">
-                                    {{ CarouselSubText4 }}
-                                </div>
-                            </q-carousel-slide>
-                        </q-carousel>
-                        <q-space></q-space>
-                        <q-carousel animated style="width: 28vw;" infinite :autoplay="thirdap" v-model="thirdslide" transition-next="fade" transition-prev="fade" control-color="white" arrows padding class="bg-transparent text-white">
-                            <q-carousel-slide name="5" class="column no-wrap flex-center">
-                                <div style="width: 30vw; white-space: pre-wrap;" class="text-weight-regular text-center text-body1">
-                                    {{ KeybindTitle }}
-                                </div>
-                                <div class="q-mt-md text-center">
-                                    <q-btn :ripple="false" flat stack><q-avatar square size="33px"><img style="width: 60px!important;" src="/assets/keybinds/TAB.svg"></q-avatar>
-                                        <div style="font-size: 10px;">
-                                            {{ Keybind1 }}
-                                        </div>
-                                    </q-btn>
-                                    <q-btn :ripple="false" flat stack><q-avatar square size="33px"><img src="/assets/keybinds/Tilde.svg"></q-avatar>
-                                        <div style="font-size: 10px;">
-                                            {{ Keybind2 }}
-                                        </div>
-                                    </q-btn>
-                                    <q-btn :ripple="false" flat stack><q-avatar square size="33px"><img src="/assets/keybinds/M.svg"></q-avatar>
-                                        <div style="font-size: 10px;">
-                                            {{ Keybind3 }}
-                                        </div>
-                                    </q-btn>
-                                    <q-btn :ripple="false" flat stack><q-avatar square size="33px"><img src="/assets/keybinds/B.svg"></q-avatar>
-                                        <div style="font-size: 10px;">
-                                            {{ Keybind4 }}
-                                        </div>
-                                    </q-btn>
-                                    <br>
-                                    <q-btn :ripple="false" flat stack><q-avatar square size="33px"><img style="width: 60px!important;" src="/assets/keybinds/LALT.svg"></q-avatar>
-                                        <div style="font-size: 10px;">
-                                            {{ Keybind5 }}
-                                        </div>
-                                    </q-btn>
-                                    <q-btn :ripple="false" flat stack><q-avatar square size="33px"><img src="/assets/keybinds/F1.svg"></q-avatar>
-                                        <div style="font-size: 10px;">
-                                            {{ Keybind6 }}
-                                        </div>
-                                    </q-btn>
-                                    <q-btn :ripple="false" flat stack><q-avatar square size="33px"><img src="/assets/keybinds/I.svg"></q-avatar>
-                                        <div style="font-size: 10px;">
-                                            {{ Keybind7 }}
-                                        </div>
-                                    </q-btn>
-                                    <q-btn :ripple="false" flat stack><q-avatar square size="33px"><img style="width: 60px!important;" src="/assets/keybinds/LALT.svg"></q-avatar>
-                                        <div style="font-size: 10px;">
-                                            {{ Keybind8 }}
-                                        </div>
-                                    </q-btn>
-                                </div>
-                            </q-carousel-slide>
-                            <q-carousel-slide name="6" class="column no-wrap flex-center">
-                                <div style="width: 30vw; white-space: pre-wrap;" class="text-weight-regular text-center text-body1">
-                                    {{ KeybindTitle }}
-                                </div>
-                                <div class="q-mt-md text-center">
-                                    <q-btn :ripple="false" flat stack><q-avatar square size="33px"><img src="/assets/keybinds/L.svg"></q-avatar>
-                                        <div style="font-size: 10px;">
-                                            {{ Keybind10 }}
-                                        </div>
-                                    </q-btn>
-                                    <q-btn :ripple="false" flat stack><q-avatar square size="33px"><img src="/assets/keybinds/G.svg"></q-avatar>
-                                        <div style="font-size: 10px;">
-                                            {{ Keybind11 }}
-                                        </div>
-                                    </q-btn>
-                                    <q-btn :ripple="false" flat stack><q-avatar square size="33px"><img src="/assets/keybinds/B.svg"></q-avatar>
-                                        <div style="font-size: 10px;">
-                                            {{ Keybind12 }}
-                                        </div>
-                                    </q-btn>
-                                    <q-btn :ripple="false" flat stack><q-avatar square size="33px"><img style="width: 60px!important;" src="/assets/keybinds/HOME.svg"></q-avatar>
-                                        <div style="font-size: 10px;">
-                                            {{ Keybind9 }}
-                                        </div>
-                                    </q-btn>
-                                    <br>
-                                        <q-btn :ripple="false" flat stack><q-avatar square size="33px"><img style="width: 60px!important;" src="/assets/keybinds/Z.svg"></q-avatar>
-                                        <div style="font-size: 10px;">
-                                            {{ Keybind13 }}
-                                        </div>
-                                    </q-btn>
-                                    <q-btn :ripple="false" flat stack><q-avatar square size="33px"><img style="width: 60px!important;" src="/assets/keybinds/X.svg"></q-avatar>
-                                        <div style="font-size: 10px;">
-                                            {{ Keybind14 }}
-                                        </div>
-                                    </q-btn>
-                                    <q-btn :ripple="false" flat stack><q-avatar square size="33px"><img style="width: 60px!important;" src="/assets/keybinds/NUM.svg"></q-avatar>
-                                        <div style="font-size: 10px;">
-                                            {{ Keybind15 }}
-                                        </div>
-                                    </q-btn>
-                                    <q-btn active-class="remove-active" :ripple="false" flat stack><q-avatar square size="33px"><img style="width: 60px!important;" src="/assets/keybinds/Y.svg"></q-avatar>
-                                        <div style="font-size: 10px;">
-                                            {{ Keybind16 }}
-                                        </div>
-                                    </q-btn>
-                                </div>
-                            </q-carousel-slide>
-                        </q-carousel>
-                    </q-card-section>
-                </q-card>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QBCore Loading</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .animated-bg {
+            background: linear-gradient(-45deg, #0f0f23, #1a1a2e, #16213e, #0f3460);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .floating-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .logo-entrance {
+            animation: logoEntrance 2s ease-out forwards;
+        }
+        
+        @keyframes logoEntrance {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .progress-glow {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+        
+        .tip-fade {
+            animation: tipFade 4s ease-in-out infinite;
+        }
+        
+        @keyframes tipFade {
+            0%, 100% { opacity: 0; transform: translateY(10px); }
+            25%, 75% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .pulse-ring {
+            animation: pulseRing 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+        }
+        
+        @keyframes pulseRing {
+            0% {
+                transform: scale(0.8);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2.4);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body class="animated-bg min-h-screen overflow-hidden select-none">
+    <!-- Floating Particles Background -->
+    <div class="floating-particles" id="particles"></div>
+    
+    <!-- Main Loading Container -->
+    <div class="relative z-10 min-h-screen flex flex-col items-center justify-center px-4">
+        
+        <!-- Logo Section -->
+        <div class="logo-entrance mb-12 relative">
+            <!-- Pulse Ring Effect -->
+            <div class="absolute inset-0 rounded-full bg-blue-500 opacity-20 pulse-ring"></div>
+            
+            <!-- Logo Container -->
+            <div class="relative bg-gray-900/50 backdrop-blur-sm rounded-full p-8 border border-gray-700/50">
+                <img src="/assets/branding/qbcore.svg" alt="QBCore" class="w-24 h-24 md:w-32 md:h-32">
             </div>
-
-            <div class="absolute-bottom q-pa-xl">
-                <q-card flat style="width: auto; background: transparent;">
-                    <q-card-section class="row items-center no-wrap">
-
-                        <!-- This is where you want to replace with your logo -->
-
-                        <img class="cursor-none brand-logo" src="/assets/branding/qbcore.svg"></img>
-                        <q-space></q-space>
-                        <q-btn :ripple="false" flat size="xl" icon="downloading" color="white" @click="download = true"></q-btn>
-                        <div class="loadingbar">
-                            <div class="loadbar"><div class="thingy"></div></div>
-                        </div>
-                        <q-btn icon="settings_suggest" color="bgbutton" @click="settings = true"></q-btn>
-                    </q-card-section>
-                </q-card>
-            </div>
-
-            <q-dialog no-shake v-model="download" position="bottom">
-                <q-card style="max-width: 400px; margin-left: 50vw; margin-bottom: 13vh;">
-                    <q-card-section>
-                        <div style="white-space: pre-wrap;" class="text-h6">
-                            {{ DownloadTitle }}
-                        </div>
-                    </q-card-section>
-
-                    <q-card-section style="white-space: pre-wrap;" class="q-pt-none text-weight-bold">
-                        {{ DownloadDesc }}
-                    </q-card-section>
-
-                    <q-card-actions align="left">
-                        <q-btn flat label="Hide details" color="detailbutton" v-close-popup></q-btn>
-                    </q-card-actions>
-                </q-card>
-            </q-dialog>
-
-            <q-dialog no-shake v-model="settings" position="right">
-                <q-card style="max-width: 300px; margin-right: 3.4vw; top: 20vh!important;">
-                    <q-card-section class="row items-center q-pb-none">
-                        <div style="white-space: pre-wrap;" class="text-h6">
-                            {{ SettingsTitle }}
-                        </div>
-                        <q-space></q-space>
-                        <q-btn icon="close" flat round dense v-close-popup></q-btn>
-                    </q-card-section>
-
-                    <q-card-section style="padding-top: 0px;">
-                        <q-toggle v-model="audioplay" size="lg" checked-icon="headset" keep-color color="togglecolor" label="Audio-track Enabled" unchecked-icon="headset_off" onclick="audiotoggle()"></q-toggle>
-                        <div style="white-space: pre-wrap;" class="text-h7 text-weight-medium q-mb-md-d">
-                            {{ AudioTrackDesc1 }}
-                        </div>
-                        <q-toggle v-model="secondap" size="lg" checked-icon="view_carousel" keep-color color="togglecolor" label="Auto-play Enabled" unchecked-icon="image"></q-toggle>
-                        <div style="white-space: pre-wrap;" class="text-h7 text-weight-medium q-mb-md-d">
-                            {{ AutoPlayDesc2 }}
-                        </div>
-                        <q-toggle v-model="playvideo" size="lg" checked-icon="play_arrow" keep-color color="togglecolor" label="Play-video Enabled" unchecked-icon="play_disabled" onclick="videotoggle()"></q-toggle>
-                        <div style="white-space: pre-wrap;" class="text-h7 text-weight-medium q-mb-md-d">
-                            {{ PlayVideoDesc3 }}
-                        </div>
-                    </q-card-section>
-                </q-card>
-            </q-dialog>
         </div>
-    </body>
+        
+        <!-- Server Title -->
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 text-center tracking-tight">
+            <span class="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                QBCore
+            </span>
+            <span class="text-gray-300">Server</span>
+        </h1>
+        
+        <!-- Loading Progress Section -->
+        <div class="w-full max-w-md mb-8">
+            <!-- Progress Bar Container -->
+            <div class="relative mb-4">
+                <div class="w-full bg-gray-800/50 rounded-full h-3 backdrop-blur-sm border border-gray-700/30">
+                    <div id="progressBar" class="bg-gradient-to-r from-blue-500 to-purple-600 h-3 rounded-full progress-glow transition-all duration-300 ease-out" style="width: 0%"></div>
+                </div>
+                <!-- Progress Percentage -->
+                <div class="text-center mt-2">
+                    <span id="progressText" class="text-blue-400 font-semibold text-lg">0%</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Rotating Tips Section -->
+        <div class="text-center mb-8 h-16 flex items-center justify-center">
+            <p id="loadingTip" class="text-gray-300 text-lg max-w-2xl px-4 tip-fade"></p>
+        </div>
+        
+        <!-- Player Info Section -->
+        <div class="bg-gray-900/30 backdrop-blur-sm rounded-lg border border-gray-700/30 p-6 w-full max-w-md">
+            <div class="grid grid-cols-2 gap-4 text-center">
+                <div>
+                    <p class="text-gray-400 text-sm uppercase tracking-wide">Player Name</p>
+                    <p id="playerName" class="text-white font-semibold text-lg">Loading...</p>
+                </div>
+                <div>
+                    <p class="text-gray-400 text-sm uppercase tracking-wide">Player ID</p>
+                    <p id="playerId" class="text-blue-400 font-semibold text-lg">---</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Status -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+            <div class="flex items-center space-x-2 text-gray-400">
+                <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span class="text-sm">Connecting to server...</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Audio (Hidden) -->
+    <audio autoplay loop id="audio" src="/assets/audio/noncopyright.mp3" style="display: none;"></audio>
+    
+    <script src="app.js"></script>
+</body>
 </html>
