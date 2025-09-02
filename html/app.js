@@ -27,6 +27,7 @@ class LoadingScreen {
         this.createParticles();
         this.startTipRotation();
         this.setupAudio();
+        this.requestPlayerData();
         this.simulateLoading();
     }
     
@@ -79,6 +80,23 @@ class LoadingScreen {
         if (audio) {
             audio.volume = 0.05;
             audio.play().catch(e => console.log('Audio autoplay prevented'));
+        }
+    }
+    
+    // Request initial player data from server
+    requestPlayerData() {
+        if (typeof invokeNative !== 'undefined') {
+            // Request player data from server
+            fetch(`https://${GetParentResourceName()}/requestPlayerData`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({})
+            }).catch(() => {
+                // Fallback if fetch fails
+                console.log('Failed to request player data');
+            });
         }
     }
     
@@ -158,8 +176,8 @@ const handlers = {
         }
     },
     
-    // Custom handler for player data
-    updateServerData(data) {
+    // Handler for real-time player count updates
+    'qb-loading:updatePlayerCount'(data) {
         if (loadingScreen) {
             loadingScreen.updatePlayerCount(data.currentPlayers, data.maxPlayers);
         }
@@ -169,16 +187,14 @@ const handlers = {
 // Initialize loading screen when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     loadingScreen = new LoadingScreen();
-    
-    // Simulate server data for demonstration
-    setTimeout(() => {
-        loadingScreen.updatePlayerCount(32, 64);
-    }, 2000);
 });
 
 // FiveM message handler
 window.addEventListener("message", function (e) {
-    (handlers[e.data.eventName] || function () {})(e.data);
+    const handler = handlers[e.data.eventName];
+    if (handler) {
+        handler(e.data);
+    }
 });
 
 // Audio controls (keeping compatibility with original)

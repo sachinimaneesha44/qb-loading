@@ -5,6 +5,10 @@ author 'Kakarot'
 description 'Loading screen'
 version '1.2.0'
 
+server_scripts {
+    'server/server.lua'
+}
+
 files {
   'assets/**',
   'html/*'
